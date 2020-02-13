@@ -38,14 +38,14 @@
 								<option id="gnu.c.compiler.option.debugging.level.1960158185" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.include.paths.359131008" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../Inc"/>
-									<listOptionValue builtIn="false" value="../Middlewares/Third_Party/OpenAMP/open-amp/lib/include"/>
-									<listOptionValue builtIn="false" value="../Middlewares/Third_Party/OpenAMP/libmetal/lib/include"/>
-									<listOptionValue builtIn="false" value="../Drivers/STM32MP1xx_HAL_Driver/Inc"/>
-									<listOptionValue builtIn="false" value="../Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy"/>
-									<listOptionValue builtIn="false" value="../Middlewares/Third_Party/OpenAMP/virtual_driver"/>
-									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32MP1xx/Include"/>
-									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
-									<listOptionValue builtIn="false" value="../Drivers/CMSIS/DSP/Include"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Middlewares/Third_Party/OpenAMP/open-amp/lib/include"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Middlewares/Third_Party/OpenAMP/libmetal/lib/include"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Drivers/STM32MP1xx_HAL_Driver/Inc"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Middlewares/Third_Party/OpenAMP/virtual_driver"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Drivers/CMSIS/Device/ST/STM32MP1xx/Include"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Drivers/CMSIS/Include"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Drivers/CMSIS/DSP/Include"/>
 								</option>
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.1318918187" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="CORE_CM4"/>
@@ -70,13 +70,13 @@
 								<option id="gnu.cpp.compiler.option.debugging.level.1010298887" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.472462101" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../Inc"/>
-									<listOptionValue builtIn="false" value="../Middlewares/Third_Party/OpenAMP/open-amp/lib/include"/>
-									<listOptionValue builtIn="false" value="../Middlewares/Third_Party/OpenAMP/libmetal/lib/include"/>
-									<listOptionValue builtIn="false" value="../Drivers/STM32MP1xx_HAL_Driver/Inc"/>
-									<listOptionValue builtIn="false" value="../Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy"/>
-									<listOptionValue builtIn="false" value="../Middlewares/Third_Party/OpenAMP/virtual_driver"/>
-									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32MP1xx/Include"/>
-									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Middlewares/Third_Party/OpenAMP/open-amp/lib/include"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Middlewares/Third_Party/OpenAMP/libmetal/lib/include"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Drivers/STM32MP1xx_HAL_Driver/Inc"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Middlewares/Third_Party/OpenAMP/virtual_driver"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Drivers/CMSIS/Device/ST/STM32MP1xx/Include"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Drivers/CMSIS/Include"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.def.1800918172" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="CORE_CM4"/>
@@ -126,12 +126,6 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
-					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="startup"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Middlewares"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
-					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
@@ -173,13 +167,13 @@
 								<option id="gnu.c.compiler.option.debugging.level.1960158185" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.include.paths.359131008" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../Inc"/>
-									<listOptionValue builtIn="false" value="../Middlewares/Third_Party/OpenAMP/open-amp/lib/include"/>
-									<listOptionValue builtIn="false" value="../Middlewares/Third_Party/OpenAMP/libmetal/lib/include"/>
-									<listOptionValue builtIn="false" value="../Drivers/STM32MP1xx_HAL_Driver/Inc"/>
-									<listOptionValue builtIn="false" value="../Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy"/>
-									<listOptionValue builtIn="false" value="../Middlewares/Third_Party/OpenAMP/virtual_driver"/>
-									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32MP1xx/Include"/>
-									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Middlewares/Third_Party/OpenAMP/open-amp/lib/include"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Middlewares/Third_Party/OpenAMP/libmetal/lib/include"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Drivers/STM32MP1xx_HAL_Driver/Inc"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Middlewares/Third_Party/OpenAMP/virtual_driver"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Drivers/CMSIS/Device/ST/STM32MP1xx/Include"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Drivers/CMSIS/Include"/>
 								</option>
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.1318918187" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="CORE_CM4"/>
@@ -201,13 +195,13 @@
 								<option id="gnu.cpp.compiler.option.debugging.level.1010298887" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.472462101" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../Inc"/>
-									<listOptionValue builtIn="false" value="../Middlewares/Third_Party/OpenAMP/open-amp/lib/include"/>
-									<listOptionValue builtIn="false" value="../Middlewares/Third_Party/OpenAMP/libmetal/lib/include"/>
-									<listOptionValue builtIn="false" value="../Drivers/STM32MP1xx_HAL_Driver/Inc"/>
-									<listOptionValue builtIn="false" value="../Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy"/>
-									<listOptionValue builtIn="false" value="../Middlewares/Third_Party/OpenAMP/virtual_driver"/>
-									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32MP1xx/Include"/>
-									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Middlewares/Third_Party/OpenAMP/open-amp/lib/include"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Middlewares/Third_Party/OpenAMP/libmetal/lib/include"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Drivers/STM32MP1xx_HAL_Driver/Inc"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Middlewares/Third_Party/OpenAMP/virtual_driver"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Drivers/CMSIS/Device/ST/STM32MP1xx/Include"/>
+									<listOptionValue builtIn="false" value="../../STM32CubeMP1/Drivers/CMSIS/Include"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.def.symbols.419133846" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="CORE_CM4"/>
@@ -254,12 +248,6 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
-					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="startup"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Middlewares"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
-					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>

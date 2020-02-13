@@ -32,8 +32,7 @@
 /** @addtogroup STM32MP1xx_Log_Private_Includes
   * @{
   */
-#include "log.h"
-
+#include "openamp_log.h"
 /**
   * @}
   */
@@ -72,7 +71,9 @@ __weak void log_buff(int ch)
 
 #endif
 
-#ifdef __GNUC__
+#if defined ( __CC_ARM) || (__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+#define PUTCHAR_PROTOTYPE int stdout_putchar(int ch)
+#elif __GNUC__
 /* With GCC/RAISONANCE, small log_info (option LD Linker->Libraries->Small log_info
    set to 'Yes') calls __io_putchar() */
 #define PUTCHAR_PROTOTYPE int __attribute__(( weak )) __io_putchar(int ch)
@@ -97,4 +98,5 @@ extern UART_HandleTypeDef huart;
 #else
 /* No printf output */
 #endif
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

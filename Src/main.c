@@ -25,7 +25,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "arm_math.h"
-#include "log.h"
+#include "openamp_log.h"
 
 /* USER CODE END Includes */
 
@@ -41,6 +41,8 @@
 #define SINE_TABLE_LEN 256
 #define ADC_BUFF_LEN 64
 #define CRY_DATA_SIZE          ((uint32_t)64)
+
+#define COPRO_SYNC_SHUTDOWN_CHANNEL  IPCC_CHANNEL_3
 
 /* USER CODE END PD */
 
@@ -88,6 +90,8 @@ __ALIGN_BEGIN __IO uint8_t uhADCxConvertedValue[ADC_BUFF_LEN] __ALIGN_END;
 __ALIGN_BEGIN uint8_t aEncryptedText[CRY_DATA_SIZE] __ALIGN_END;
 __ALIGN_BEGIN static uint8_t aSHA256Digest[32] __ALIGN_END;
 __ALIGN_BEGIN static uint8_t atext[8] __ALIGN_END;
+
+volatile uint8_t crypt_enabled=1;
 
 /* USER CODE END PV */
 
@@ -264,6 +268,7 @@ int main(void)
   /* USER CODE BEGIN 1 */
   //volatile uint8_t debug_loop = 0;    // needed to let M4 perform a loop until the debugger attaches
   int n;
+  int crypt_tries;
   /* USER CODE END 1 */
   
 
@@ -280,16 +285,18 @@ int main(void)
   /*HW semaphore Clock enable*/
   __HAL_RCC_HSEM_CLK_ENABLE();
 
-
   /* USER CODE END Init */
 
   /* Configure the system clock */
   //SystemClock_Config();       // do not call this function in production mode, else Hard fault exception !!!
 
   /* IPCC initialisation */
-   MX_IPCC_Init();
+  MX_IPCC_Init();
   /* OpenAmp initialisation ---------------------------------*/
   MX_OPENAMP_Init(RPMSG_REMOTE, NULL);
+
+  HAL_IPCC_ActivateNotification(&hipcc, COPRO_SYNC_SHUTDOWN_CHANNEL, IPCC_CHANNEL_DIR_RX,
+              CoproSync_ShutdownCb);
 
   /* USER CODE BEGIN SysInit */
   /*
@@ -324,7 +331,8 @@ int main(void)
   MX_DMA_Init();
   MX_ADC1_Init();
   MX_CRC2_Init();
-  MX_CRYP2_Init();
+  if (crypt_enabled)
+    MX_CRYP2_Init();
   MX_DAC1_Init();
   MX_HASH2_Init();
   MX_TIM2_Init();
@@ -398,29 +406,42 @@ int main(void)
           HAL_Delay(10);
           VIRT_UART_Transmit(&huart0, (uint8_t*)mBuffTx, n);
 
-          //##-1- Start the AES encryption in ECB chaining mode with DMA #############
-          if(HAL_CRYP_Encrypt_DMA(&hcryp2, (uint32_t*)uhADCxConvertedValue, CRY_DATA_SIZE, (uint32_t*)aEncryptedText) != HAL_OK)
-          {
-              // Processing Error
-              Error_Handler(__FILE__, __LINE__);
-          }
+          // Do not start encryption if crypto not supported on the chip
+          if (crypt_enabled) {
+        	  //##-1- Start the AES encryption in ECB chaining mode with DMA #############
+        	  if(HAL_CRYP_Encrypt_DMA(&hcryp2, (uint32_t*)uhADCxConvertedValue, CRY_DATA_SIZE, (uint32_t*)aEncryptedText) != HAL_OK)
+        	  {
+        		  // Processing Error
+        		  Error_Handler(__FILE__, __LINE__);
+        	  }
 
-          /*  Before starting a new process, you need to check the current state of the peripheral;
-            if it’s busy you need to wait for the end of current transfer before starting a new one.
-            For simplicity reasons, this example is just waiting till the end of the
-            process, but application may perform other tasks while transfer operation
-            is ongoing. */
-          while (HAL_CRYP_GetState(&hcryp2) != HAL_CRYP_STATE_READY)
-          {
+        	  /*  Before starting a new process, you need to check the current state of the peripheral;
+            	if it’s busy you need to wait for the end of current transfer before starting a new one.
+            	For simplicity reasons, this example is just waiting till the end of the
+            	process, but application may perform other tasks while transfer operation
+            	is ongoing. */
+        	  crypt_tries = 100;
+        	  while ((HAL_CRYP_GetState(&hcryp2) != HAL_CRYP_STATE_READY) && (crypt_tries > 0))
+        	  {
+        		  crypt_tries--;
+        		  HAL_Delay(10);
+        	  }
+        	  n = 0;
+        	  n += sprintf(mBuffTx+n, "%u ENCR=", (unsigned int)uwTick);
+        	  if (crypt_tries > 0) {
+        		  for (int i=0; i<CRY_DATA_SIZE; i++) {
+        			  n += sprintf(mBuffTx+n, "%x ", aEncryptedText[i]);
+        		  }
+        	  }
+        	  else {
+    			  n += sprintf(mBuffTx+n, "NOCRYPTO ");
+    			  crypt_enabled=0;
+    			  Log("Crypto IP not available \n");
+        	  }
+        	  n += sprintf(mBuffTx+n, "\n");
+        	  HAL_Delay(10);
+        	  VIRT_UART_Transmit(&huart0, (uint8_t*)mBuffTx, n);
           }
-          n = 0;
-          n += sprintf(mBuffTx+n, "%u ENCR=", (unsigned int)uwTick);
-          for (int i=0; i<CRY_DATA_SIZE; i++) {
-              n += sprintf(mBuffTx+n, "%x ", aEncryptedText[i]);
-          }
-          n += sprintf(mBuffTx+n, "\n");
-          HAL_Delay(10);
-          VIRT_UART_Transmit(&huart0, (uint8_t*)mBuffTx, n);
       }
     /* USER CODE END WHILE */
 
@@ -540,8 +561,8 @@ void SystemClock_Config(void)
   PeriphClkInit.Sai4ClockSelection = RCC_SAI4CLKSOURCE_PLL3_Q;
   PeriphClkInit.Uart24ClockSelection = RCC_UART24CLKSOURCE_HSI;
   PeriphClkInit.EthClockSelection = RCC_ETHCLKSOURCE_PLL4;
-  PeriphClkInit.FmcClockSelection = RCC_FMCCLKSOURCE_BCLK;
-  PeriphClkInit.QspiClockSelection = RCC_QSPICLKSOURCE_BCLK;
+  PeriphClkInit.FmcClockSelection = RCC_FMCCLKSOURCE_ACLK;
+  PeriphClkInit.QspiClockSelection = RCC_QSPICLKSOURCE_ACLK;
   PeriphClkInit.DsiClockSelection = RCC_DSICLKSOURCE_PHY;
   PeriphClkInit.CkperClockSelection = RCC_CKPERCLKSOURCE_OFF;
   PeriphClkInit.SpdifrxClockSelection = RCC_SPDIFRXCLKSOURCE_PLL4;

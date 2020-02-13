@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    log.h
+  * @file    openamp_log.h
   * @author  MCD Application Team
   * @brief   logging services
   ******************************************************************************
@@ -61,7 +61,6 @@
 #ifndef LOGLEVEL
 #define LOGLEVEL LOGINFO
 #endif
-
 
 /**
   * @}

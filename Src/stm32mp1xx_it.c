@@ -23,7 +23,7 @@
 #include "stm32mp1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "log.h"
+#include "openamp_log.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -33,7 +33,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
- 
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -300,7 +300,7 @@ void IPCC_TX0_IRQHandler(void) {
 }
 
 void IPCC_RX1_IRQHandler(void) {
-    log_err("%s: IT RX1\r\n", __func__);
+    log_dbg("%s: IT RX1\r\n", __func__);
     HAL_IPCC_RX_IRQHandler(&hipcc);
 }
 
