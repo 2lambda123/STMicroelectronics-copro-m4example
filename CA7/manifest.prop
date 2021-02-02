@@ -1,0 +1,4 @@
+MANIFEST_VERSION = openstlinux-5.4-dunfell-mp1-20-11-12
+KERNEL_DT = ./DeviceTree/copro_m4example/kernel
+UBOOT_DT = ./DeviceTree/copro_m4example/u-boot
+TFA_DT = ./DeviceTree/copro_m4example/tf-a
